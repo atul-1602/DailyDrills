@@ -1,6 +1,14 @@
 # DailyDrills
 A daily quiz web app built with Next.js and Supabase to help developers learn through MCQs.
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+<img width="1512" alt="Screenshot 2025-06-30 at 1 14 10 AM" src="https://github.com/user-attachments/assets/e9ebaf86-2abb-4cfb-8226-8db928d2495b" />
+<img width="1512" alt="Screenshot 2025-06-30 at 1 14 21 AM" src="https://github.com/user-attachments/assets/190ccf65-2aea-49a9-859a-eeda8fa2abf9" />
+<img width="1512" alt="Screenshot 2025-06-30 at 1 14 49 AM" src="https://github.com/user-attachments/assets/5e2162f4-0fad-469c-951f-8c69831d2be0" />
+
+
+
+
 # Quiz App
 
 A modern quiz application built with Next.js, TypeScript, Tailwind CSS, and Supabase.
