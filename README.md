@@ -1,140 +1,131 @@
 # DailyDrills
-A daily quiz web app built with Next.js and Supabase to help developers learn through MCQs.
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-<img width="1512" alt="Screenshot 2025-06-30 at 1 14 10 AM" src="https://github.com/user-attachments/assets/e9ebaf86-2abb-4cfb-8226-8db928d2495b" />
+An AI-powered, gamified quiz platform for students. Pick a grade, subject, and topic, and Gemini generates a fresh quiz on the spot — with scoring, streaks, XP, and a global leaderboard to keep you coming back daily.
 
-<img width="1512" alt="Screenshot 2025-06-30 at 1 14 21 AM" src="https://github.com/user-attachments/assets/190ccf65-2aea-49a9-859a-eeda8fa2abf9" />
-
-<img width="1512" alt="Screenshot 2025-06-30 at 1 14 49 AM" src="https://github.com/user-attachments/assets/5e2162f4-0fad-469c-951f-8c69831d2be0" />
-
-
-
-
-# Quiz App
-
-A modern quiz application built with Next.js, TypeScript, Tailwind CSS, and Supabase.
+**Live app:** [daily-drills.vercel.app](https://daily-drills.vercel.app)
 
 ## Features
 
-- ✅ Create and manage quizzes
-- ✅ Add multiple choice questions
-- ✅ Modern, responsive UI
-- ✅ TypeScript for type safety
-- ✅ Supabase for data persistence
-- ✅ Real-time updates
+- 🤖 **AI-generated quizzes** — Google Gemini (`@ai-sdk/google`) generates questions on demand for any grade/subject/topic/difficulty combination
+- 🔐 **Authentication** — Clerk handles sign-in, sessions, and route protection
+- 🏆 **Gamification** — XP, streaks, accuracy tracking, and a global/grade/subject leaderboard
+- 📊 **Personal dashboard** — quiz history, stats, and progress at a glance
+- 🌙 **Dark-mode-only UI** — a single, polished dark theme built with Tailwind CSS v4 and Framer Motion
+- 📱 Fully responsive, with SEO basics (metadata, `robots.txt`, `sitemap.xml`) built in
 
 ## Tech Stack
 
-- **Frontend**: Next.js 15, React 19, TypeScript
-- **Styling**: Tailwind CSS
-- **Database**: Supabase (PostgreSQL)
-- **Authentication**: Supabase Auth (ready to implement)
+| Layer | Tech |
+|---|---|
+| Framework | [Next.js 15](https://nextjs.org) (App Router) + React 19 + TypeScript |
+| Styling | Tailwind CSS v4, Framer Motion |
+| Auth | [Clerk](https://clerk.com) |
+| Database | MongoDB + Mongoose |
+| AI | Google Gemini via [Vercel AI SDK](https://sdk.vercel.ai) (`ai` + `@ai-sdk/google`) |
+| Validation | Zod |
+| Deployment | Vercel |
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ 
-- npm or yarn
-- Supabase account
+- Node.js 18+
+- A [MongoDB Atlas](https://cloud.mongodb.com) cluster
+- A [Clerk](https://dashboard.clerk.com) application
+- A [Google AI Studio](https://aistudio.google.com/apikey) API key (Gemini)
 
 ### Installation
 
-1. Clone the repository:
 ```bash
-git clone <your-repo-url>
-cd quiz-app
-```
-
-2. Install dependencies:
-```bash
+git clone https://github.com/atul-1602/DailyDrills.git
+cd DailyDrills
 npm install
 ```
 
-3. Set up environment variables:
-   - Create a `.env.local` file in the root directory
-   - Add your Supabase credentials:
+### Environment variables
+
+Copy `.env.example` to `.env.local` and fill in the values:
+
+```bash
+cp .env.example .env.local
+```
 
 ```env
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+# Clerk Authentication — https://dashboard.clerk.com
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+
+# MongoDB connection string — https://cloud.mongodb.com
+MONGODB_URI=
+
+# Google Gemini AI — https://aistudio.google.com/apikey
+GOOGLE_GENERATIVE_AI_API_KEY=
+
+# Optional: your production domain, used for metadata/sitemap/robots
+NEXT_PUBLIC_SITE_URL=
 ```
 
-### Supabase Setup
+In MongoDB Atlas, make sure **Network Access** allows connections from wherever your app runs (`0.0.0.0/0` for Vercel/serverless, since it doesn't use static IPs), and that your **Database User** has read/write access. No manual schema setup is needed — Mongoose creates collections (`quizzes`, `quizattempts`, `userstats`) on first write.
 
-1. Go to [supabase.com](https://supabase.com) and create a new project
-2. Get your project URL and anon key from Settings > API
-3. Create the following tables in your Supabase SQL editor:
+### Run locally
 
-#### Quizzes Table
-```sql
-CREATE TABLE quizzes (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  title TEXT NOT NULL,
-  description TEXT,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-```
-
-#### Questions Table
-```sql
-CREATE TABLE questions (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  quiz_id UUID REFERENCES quizzes(id) ON DELETE CASCADE,
-  question_text TEXT NOT NULL,
-  options TEXT[] NOT NULL,
-  correct_answer INTEGER NOT NULL,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-```
-
-### Running the Application
-
-1. Start the development server:
 ```bash
 npm run dev
 ```
 
-2. Open [http://localhost:3000](http://localhost:3000) in your browser
-
-3. Create your first quiz and start testing!
+Open [http://localhost:3000](http://localhost:3000).
 
 ## Project Structure
 
 ```
 src/
-├── app/                    # Next.js app directory
-│   ├── page.tsx           # Home page
-│   ├── layout.tsx         # Root layout
-│   ├── globals.css        # Global styles
-│   └── quiz/
-│       └── create/
-│           └── page.tsx   # Quiz creation page
-├── components/            # React components
-│   └── QuizCard.tsx      # Quiz card component
-└── lib/                  # Utility functions
-    ├── supabase.ts       # Supabase client
-    └── quiz-utils.ts     # Quiz operations
+├── app/
+│   ├── page.tsx                     # Landing page
+│   ├── layout.tsx                   # Root layout, Clerk provider, metadata
+│   ├── dashboard/page.tsx           # User dashboard (stats, streak, history)
+│   ├── leaderboards/page.tsx        # Global/grade/subject leaderboards
+│   ├── quiz/
+│   │   ├── setup/page.tsx           # Choose grade/subject/topic/difficulty
+│   │   ├── play/[quizId]/page.tsx   # Take the quiz
+│   │   └── result/[quizId]/page.tsx # Score summary
+│   ├── api/
+│   │   ├── quiz/generate/route.ts   # Generates a quiz via Gemini + saves it
+│   │   ├── quiz/start/route.ts      # Starts a quiz attempt
+│   │   ├── quiz/answer/route.ts     # Submits an answer
+│   │   ├── quiz/complete/route.ts   # Finalizes an attempt, updates stats
+│   │   ├── quiz/[quizId]/route.ts   # Fetches a quiz (answers stripped)
+│   │   ├── leaderboard/route.ts     # Leaderboard data
+│   │   └── user/{stats,history}/    # Per-user stats and quiz history
+│   ├── robots.ts / sitemap.ts       # SEO metadata routes
+│   └── error.tsx / not-found.tsx    # Error/empty states
+├── components/                      # Navbar, Footer, QuizCard, etc.
+├── lib/
+│   ├── db.ts                        # Cached Mongoose connection
+│   └── validation.ts                # Zod schemas for API payloads
+├── models/                           # Quiz, QuizAttempt, UserStats (Mongoose)
+└── middleware.ts                     # Clerk route protection
 ```
 
 ## Available Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
+- `npm run dev` — start the dev server (Turbopack)
+- `npm run build` — production build
+- `npm run start` — start the production server
+- `npm run lint` — run ESLint
 
-## Next Steps
+## Deploying to Vercel
 
-- [ ] Add quiz taking functionality
-- [ ] Implement user authentication
-- [ ] Add quiz results and scoring
-- [ ] Create quiz editing functionality
-- [ ] Add quiz sharing features
-- [ ] Implement real-time collaboration
+1. Push to GitHub and import the repo into Vercel.
+2. Add the environment variables above under **Project Settings → Environment Variables** for the Production environment.
+3. Clerk production instances require DNS verification on a domain you control — a `*.vercel.app` domain can't be verified this way, so use Clerk **test/development** keys until you attach a custom domain, then switch to `pk_live_`/`sk_live_` keys.
+4. Deploy — `next build`/`next start` work out of the box, no extra config needed.
+
+## Roadmap
+
+- [ ] Quiz history filtering/search
+- [ ] Social sharing of results
+- [ ] Custom domain + Clerk production instance
+- [ ] Additional question types (not just MCQ)
 
 ## Contributing
 
@@ -145,4 +136,4 @@ src/
 
 ## License
 
-MIT License
+MIT
