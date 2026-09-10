@@ -4,6 +4,10 @@ An AI-powered, gamified quiz platform for students. Pick a grade, subject, and t
 
 **Live app:** [daily-drills.vercel.app](https://daily-drills.vercel.app)
 
+<img width="1512" height="833" alt="DailyDrills dashboard" src="https://github.com/user-attachments/assets/04cebdbc-cd44-41ad-9de3-439a19549685" />
+
+<img width="1507" height="825" alt="DailyDrills quiz" src="https://github.com/user-attachments/assets/25660dd4-cf07-4645-a26b-badcb4517321" />
+
 ## Features
 
 - 🤖 **AI-generated quizzes** — Google Gemini (`@ai-sdk/google`) generates questions on demand for any grade/subject/topic/difficulty combination
