@@ -58,7 +58,7 @@ const QuizCard: React.FC<QuizCardProps> = ({ questions, topic }) => {
 
     const getOptionClass = (option: string) => {
         if (!isAnswered) {
-            return 'hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 hover:border-purple-300 hover:scale-105';
+            return 'hover:bg-gradient-to-r hover:from-lavender hover:to-sky hover:border-primary hover:scale-105';
         }
 
         if (option === current.answer) {
@@ -77,12 +77,12 @@ const QuizCard: React.FC<QuizCardProps> = ({ questions, topic }) => {
         const isAverage = percentage >= 50;
 
         return (
-            <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 flex items-center justify-center p-4">
+            <div className="min-h-screen bg-gradient-to-br from-lavender via-sky to-mint flex items-center justify-center p-4">
                 <div className="max-w-sm sm:max-w-md w-full bg-white rounded-2xl sm:rounded-3xl shadow-2xl p-6 sm:p-8 text-center animate-fade-in-scale">
                     {/* Trophy Icon */}
                     <div className="mb-4 sm:mb-6">
                         <div className={`w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full flex items-center justify-center ${isExcellent ? 'bg-gradient-to-r from-yellow-400 to-orange-400' :
-                                isGood ? 'bg-gradient-to-r from-blue-400 to-purple-400' :
+                                isGood ? 'bg-gradient-to-r from-primary to-indigo-400' :
                                     isAverage ? 'bg-gradient-to-r from-green-400 to-teal-400' :
                                         'bg-gradient-to-r from-red-400 to-pink-400'
                             }`}>
@@ -97,7 +97,7 @@ const QuizCard: React.FC<QuizCardProps> = ({ questions, topic }) => {
                     </h2>
 
                     <div className="mb-4 sm:mb-6">
-                        <div className="text-4xl sm:text-6xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-1 sm:mb-2">
+                        <div className="text-4xl sm:text-6xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-1 sm:mb-2">
                             {score}/{questions.length}
                         </div>
                         <div className="text-base sm:text-lg text-gray-600">
@@ -149,7 +149,7 @@ const QuizCard: React.FC<QuizCardProps> = ({ questions, topic }) => {
                     </div>
 
                     <Link href="/">
-                        <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-3 sm:py-4 px-4 sm:px-6 rounded-full hover:from-purple-700 hover:to-pink-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 text-sm sm:text-base">
+                        <button className="w-full bg-gradient-to-r from-primary to-secondary text-white font-bold py-3 sm:py-4 px-4 sm:px-6 rounded-full hover:opacity-90 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 text-sm sm:text-base">
                             <Home className="w-4 h-4 sm:w-5 sm:h-5" />
                             Go to Home
                         </button>
@@ -160,12 +160,12 @@ const QuizCard: React.FC<QuizCardProps> = ({ questions, topic }) => {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 p-3 sm:p-4">
+        <div className="min-h-screen bg-gradient-to-br from-lavender via-sky to-mint p-3 sm:p-4">
             <div className="max-w-2xl sm:max-w-3xl lg:max-w-4xl mx-auto">
                 <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 lg:p-8 animate-fade-in-up">
                     {/* Header */}
                     <div className="text-center mb-6 sm:mb-8">
-                        <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-1 sm:mb-2">
+                        <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-1 sm:mb-2">
                             {topic} Quiz
                         </h2>
                         <p className="text-gray-600 text-sm sm:text-base">Test your knowledge and improve your skills</p>
@@ -177,7 +177,7 @@ const QuizCard: React.FC<QuizCardProps> = ({ questions, topic }) => {
                             <div className="text-xs sm:text-sm font-medium text-gray-600">
                                 Question {currentIndex + 1} of {questions.length}
                             </div>
-                            <div className="text-xs sm:text-sm font-bold text-purple-600">
+                            <div className="text-xs sm:text-sm font-bold text-primary">
                                 {progressPercent}%
                             </div>
                         </div>
@@ -191,7 +191,7 @@ const QuizCard: React.FC<QuizCardProps> = ({ questions, topic }) => {
 
                     {/* Question */}
                     <div className="mb-6 sm:mb-8">
-                        <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6">
+                        <div className="bg-gradient-to-r from-lavender to-sky rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6">
                             <p className="text-base sm:text-lg lg:text-xl font-semibold text-gray-800 leading-relaxed">
                                 Q{currentIndex + 1}. {current.question}
                             </p>
@@ -270,7 +270,7 @@ const QuizCard: React.FC<QuizCardProps> = ({ questions, topic }) => {
                                 disabled={!isAnswered}
                                 className={`flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium transition-all duration-300 text-sm sm:text-base ${!isAnswered
                                         ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                                        : 'bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600 hover:scale-105 shadow-lg'
+                                        : 'bg-gradient-to-r from-primary to-indigo-500 text-white hover:opacity-90 hover:scale-105 shadow-lg'
                                     }`}
                             >
                                 Next

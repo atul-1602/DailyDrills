@@ -3,14 +3,14 @@ import React from 'react'
 const CategoriesTags = ({topic="Html", count=20}: {topic: string, count: number}) => {
   // Generate a random gradient for variety
   const gradients = [
-    'bg-gradient-to-br from-blue-400 to-purple-500',
-    'bg-gradient-to-br from-green-400 to-blue-500',
-    'bg-gradient-to-br from-purple-400 to-pink-500',
-    'bg-gradient-to-br from-yellow-400 to-orange-500',
-    'bg-gradient-to-br from-red-400 to-pink-500',
+    'bg-gradient-to-br from-indigo-400 to-primary',
+    'bg-gradient-to-br from-emerald-400 to-accent',
+    'bg-gradient-to-br from-primary to-secondary',
+    'bg-gradient-to-br from-amber-400 to-orange-500',
+    'bg-gradient-to-br from-secondary to-pink-500',
     'bg-gradient-to-br from-indigo-400 to-purple-500',
-    'bg-gradient-to-br from-teal-400 to-blue-500',
-    'bg-gradient-to-br from-pink-400 to-red-500'
+    'bg-gradient-to-br from-teal-400 to-accent',
+    'bg-gradient-to-br from-secondary to-red-500'
   ]
   
   const randomGradient = gradients[Math.floor(Math.random() * gradients.length)]

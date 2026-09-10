@@ -6,7 +6,7 @@ const ClearQuizButton = () => {
     <div className="pb-6 sm:pb-8 px-4 flex justify-center">
       <button className="
         group relative inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 
-        bg-gradient-to-r from-red-500 to-pink-500 
+        bg-gradient-to-r from-secondary to-rose-600 
         text-white font-medium rounded-full 
         shadow-lg hover:shadow-xl 
         transition-all duration-300 ease-out
@@ -16,7 +16,7 @@ const ClearQuizButton = () => {
         text-sm sm:text-base
       ">
         {/* Background animation */}
-        <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-rose-600 to-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         
         {/* Icon */}
         <div className="relative z-10">
